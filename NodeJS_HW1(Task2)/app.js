@@ -6,9 +6,8 @@ const path = require('path');
 const oldFolder = path.join(__dirname, "Flat1");
 
 
-
-function flatMoving(oldFolder ) {
-		fs.readdir(oldFolder,  (err, files) => {
+function flatMoving(oldFolder) {
+		fs.readdir(oldFolder, (err, files) => {
 				if (err) {
 						console.log(err);
 						return;
