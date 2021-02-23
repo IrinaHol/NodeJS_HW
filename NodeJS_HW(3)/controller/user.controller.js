@@ -29,7 +29,7 @@ module.exports = {
 	registerUser: async (req, res) => {
 		try {
 			const user = req.body;
-			await userService.register(user)
+			await userService.register(user);
 
 			res.status(errorCodes.CREATED).json(msg.CREATED['en']);
 		} catch (e) {
@@ -60,5 +60,4 @@ module.exports = {
 			res.status(errorCodes.BAD_REQUEST).json(e.message);
 		}
 	}
-
 }
