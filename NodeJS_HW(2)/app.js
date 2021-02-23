@@ -100,7 +100,7 @@ app.post('/register', (req, res) => {
 		})
 	})
 
-//error
+//message
 	app.get('/err', (req, res) => {
 		res.render('error')
 	})
