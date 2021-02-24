@@ -6,7 +6,6 @@ module.exports = {
 	getAllUsers: async (req, res) => {
 		try {
 			const users = await userService.findAll();
-
 			res.json(users);
 
 		} catch (e) {
@@ -17,7 +16,6 @@ module.exports = {
 	getSingleUser: async (req, res) => {
 		try {
 			const {userId} = req.params;
-
 			const userById = await userService.findUserById(userId);
 			res.json(userById);
 
@@ -30,8 +28,8 @@ module.exports = {
 		try {
 			const user = req.body;
 			await userService.register(user);
-
 			res.status(errorCodes.CREATED).json(msg.CREATED['en']);
+
 		} catch (e) {
 			res.status(errorCodes.BAD_REQUEST).json(e.message);
 		}
@@ -40,7 +38,6 @@ module.exports = {
 	getByName: async (req, res) => {
 		try {
 			const {email} = req.body;
-
 			const user = await userService.findUserByEmail(email);
 			res.json(user);
 
@@ -51,7 +48,6 @@ module.exports = {
 
 	deleteUserById: async (req, res) => {
 		try {
-
 			const {userId} = req.params;
 			userService.deleteUserById(userId);
 			res.json(msg.DELETED['en']);
