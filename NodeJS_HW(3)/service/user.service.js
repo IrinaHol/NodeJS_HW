@@ -15,6 +15,7 @@ module.exports = {
  },
  findUserById: async (userId) => {
 	const oneUser = await fsExtra.readJSON(dirPath);
+
 	return oneUser[userId];
  },
  findUserByEmail: async (email) => {
