@@ -6,6 +6,7 @@ module.exports = {
 	getAllUsers: async (req, res) => {
 		try {
 			const users = await userService.findAll();
+
 			res.json(users);
 
 		} catch (e) {
@@ -16,6 +17,7 @@ module.exports = {
 		try {
 			const {userId} = req.params;
 			const userById = await userService.findUserById(userId);
+
 			res.json(userById);
 
 		} catch (e) {
@@ -25,6 +27,7 @@ module.exports = {
 	registerUser: async (req, res) => {
 		try {
 			const user = req.body;
+
 			await userService.register(user);
 			res.status(errorCodes.CREATED).json(msg.CREATED['en']);
 
@@ -36,6 +39,7 @@ module.exports = {
 		try {
 			const {email} = req.body;
 			const user = await userService.findUserByEmail(email);
+
 			res.json(user);
 
 		} catch (e) {
@@ -45,6 +49,7 @@ module.exports = {
 	deleteUserById: async (req, res) => {
 		try {
 			const {userId} = req.params;
+
 			userService.deleteUserById(userId);
 			res.json(msg.DELETED['en']);
 

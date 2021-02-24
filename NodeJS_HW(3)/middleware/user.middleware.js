@@ -14,7 +14,6 @@ module.exports =  {
 			if (userId < 0 || !Number.isInteger(userId) || Number.isNaN(userId)) {
 				throw new Error(errorMessage.NOT_VALID_ID['en']);
 			}
-
 			next();
 		} catch (e) {
 			res.status(errorCodes.BAD_REQUEST).json(e.message);
@@ -24,7 +23,6 @@ module.exports =  {
 	isUserValid: async (req, res, next) => {
 		try {
 			const {nickname, password, email} = req.body;
-
 			const test = await fsExtra.readJSON(dirPath);
 			const findDataUser = test.find(value => value.email === email);
 
@@ -36,7 +34,6 @@ module.exports =  {
 				|| !nickname || !email || !email.includes('@') || !password) {
 		 throw new Error(errorMessage.NOT_VALID_USER['en']);
 			}
-
 			next();
 		} catch (e) {
 			res.status(errorCodes.BAD_REQUEST).json(e.message);
@@ -46,14 +43,12 @@ module.exports =  {
 	checkIsUserPresent: async (req, res, next) => {
 		try {
 			const {email} = req.body;
-
 			const test = await fsExtra.readJSON(dirPath);
 			const findOneUser = test.find(value =>  value.email === email);
 
 			if (!findOneUser) {
 				throw new Error(errorMessage.NOT_PRESENT_USER['en']);
 			}
-
 			next();
 		} catch (e) {
 			res.status(errorCodes.BAD_REQUEST).json(e.message);
