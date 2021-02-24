@@ -21,7 +21,7 @@ module.exports = {
 		const foundUser = findUser.findIndex(u => u.email === email );
 		return findUser[foundUser];
 	},
-	deleteUserById: async (userId) => {
+ deleteUserById: async (userId) => {
 		const readUsers = await fsExtra.readJSON(dirPath);
 		const deletedUser = readUsers.filter((value, index) => index !== +userId);
 		await fsExtra.writeJSON(dirPath, deletedUser);

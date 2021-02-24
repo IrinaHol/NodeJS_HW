@@ -12,7 +12,6 @@ module.exports = {
 			res.status(errorCodes.BAD_REQUEST).json(e.message);
 		}
 	},
-
 	getSingleUser: async (req, res) => {
 		try {
 			const {userId} = req.params;
@@ -23,7 +22,6 @@ module.exports = {
 			res.status(errorCodes.BAD_REQUEST).json(e.message);
 		}
 	},
-
 	registerUser: async (req, res) => {
 		try {
 			const user = req.body;
@@ -34,7 +32,6 @@ module.exports = {
 			res.status(errorCodes.BAD_REQUEST).json(e.message);
 		}
 	},
-
 	getByName: async (req, res) => {
 		try {
 			const {email} = req.body;
@@ -45,7 +42,6 @@ module.exports = {
 			res.status(errorCodes.BAD_REQUEST).json(e.message);
 		}
 	},
-
 	deleteUserById: async (req, res) => {
 		try {
 			const {userId} = req.params;

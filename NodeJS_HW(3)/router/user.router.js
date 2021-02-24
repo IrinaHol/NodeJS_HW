@@ -9,7 +9,7 @@ router.get('/:userId', userMiddleware.checkIsUserIdValid, userController.getSing
 
 router.post('/', userMiddleware.isUserValid, userController.registerUser);
 
-router.post('/findUser', userMiddleware.checkIsUserPresent, userController.getByName);
+router.post('/findByEmail', userMiddleware.checkIsUserPresent, userController.getByName);
 
 router.delete('/:userId', userController.deleteUserById);
 
