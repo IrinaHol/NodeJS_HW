@@ -11,6 +11,6 @@ router.post('/', userMiddleware.isUserValid, userController.registerUser);
 
 router.post('/findByEmail', userMiddleware.checkIsUserPresent, userController.getByName);
 
-router.delete('/:userId', userController.deleteUserById);
+router.delete('/:userId', userMiddleware.checkIsUserIdValid, userController.deleteUserById);
 
 module.exports = router;
