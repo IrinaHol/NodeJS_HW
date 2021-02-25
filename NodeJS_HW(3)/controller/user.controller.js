@@ -45,7 +45,7 @@ module.exports = {
         }
     },
 
-    deleteUserById: async (req, res) => {
+    deleteUserById: (req, res) => {
         try {
             const { userId } = req.params;
 
