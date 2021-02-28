@@ -1,13 +1,19 @@
 const errorMessage = require('../message/error.messages');
 const errorCodes = require('../constant/errorCodes.enum');
+const { findUserById } = require('../service/user.service');
 
 module.exports = {
-    checkIsUserIdValid: (req, res, next) => {
+    checkIsUserIdValid: async (req, res, next) => {
         try {
             const { userId } = req.params;
+            const findUser = await findUserById(userId);
 
             if (userId.length !== 24) {
                 throw new Error(errorMessage.NOT_VALID_ID.en);
+            }
+
+            if (!findUser) {
+                throw new Error(errorMessage.NOT_PRESENT_USER.en);
             }
 
             next();
