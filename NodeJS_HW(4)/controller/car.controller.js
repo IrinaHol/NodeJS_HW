@@ -34,6 +34,7 @@ module.exports = {
             res.status(errorCodes.BAD_REQUEST).json(e.message);
         }
     },
+
     updateCar: async (req, res) => {
         try {
             const { carId } = req.params;

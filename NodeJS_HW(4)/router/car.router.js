@@ -1,5 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
 const router = require('express').Router();
-//
+
 const carController = require('../controller/car.controller');
 const carMiddleware = require('../middleware/car.middleware');
 
