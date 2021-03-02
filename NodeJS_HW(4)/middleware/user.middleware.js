@@ -40,5 +40,18 @@ module.exports = {
         } catch (e) {
             res.status(errorCodes.BAD_REQUEST).json(e.message);
         }
+    },
+
+    isUserPresent: (req, res, next) => {
+        try {
+            const { email } = req.body;
+
+            if (!email) throw new Error(errorMessage.NOT_PRESENT_USER.en);
+
+            next();
+        } catch (e) {
+            res.status(errorCodes.BAD_REQUEST).json(e.message);
+        }
     }
+
 };
