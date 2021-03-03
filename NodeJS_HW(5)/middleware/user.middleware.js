@@ -36,6 +36,6 @@ module.exports = {
         } catch (e) {
             res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
         }
-    }
+    },
 
 };

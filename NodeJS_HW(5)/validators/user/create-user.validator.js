@@ -7,7 +7,8 @@ module.exports = Joi.object({
         .alphanum()
         .min(2)
         .max(50)
-        .required(),
+        .required()
+        .allow('X Æ A-Xii'),
     age: Joi.number().integer().min(3).max(120),
     email: Joi.string().trim().regex(EMAIL_REGEXP).required(),
     password: Joi.string()

@@ -9,7 +9,7 @@ router.get('/:carId', carMiddleware.checkIsCarIdValid, carController.getOneCar);
 
 router.post('/', carMiddleware.isCarValid, carController.createCar);
 
-router.put('/:carId', carMiddleware.checkIsCarIdValid, carController.updateCar);
+router.put('/:carId', carMiddleware.checkIsCarIdValid, carMiddleware.isCarUpdateValid, carController.updateCar);
 
 router.delete('/:carId', carMiddleware.checkIsCarIdValid, carController.deleteCarById);
 

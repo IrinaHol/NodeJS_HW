@@ -28,4 +28,18 @@ module.exports = {
             res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
         }
     },
+
+    isCarUpdateValid: (req, res, next) => {
+        try {
+            const { error } = carValidator.carUpdateValidator.validate(req.body);
+
+            if (error) {
+                throw new Error(error.details[0].message);
+            }
+
+            next();
+        } catch (e) {
+            res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
+        }
+    }
 };
