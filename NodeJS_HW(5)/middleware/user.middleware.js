@@ -2,6 +2,7 @@ const { errorMessages } = require('../message');
 const { errorCodesEnum } = require('../constant');
 const { findUserById } = require('../service/user.service');
 const { userValidator } = require('../validators');
+const User = require('../dataBase/models/User.model');
 
 module.exports = {
     checkIsUserIdValid: async (req, res, next) => {
@@ -38,4 +39,19 @@ module.exports = {
         }
     },
 
+    isUserPresent: async (req, res, next) => {
+        try {
+            const { email } = req.body;
+
+            const userByEmail = await User.findOne({ email });
+
+            if (userByEmail) {
+                throw new Error(errorCodesEnum.USER_IS_PRESENT.en);
+            }
+
+            next();
+        } catch (e) {
+            res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
+        }
+    }
 };
