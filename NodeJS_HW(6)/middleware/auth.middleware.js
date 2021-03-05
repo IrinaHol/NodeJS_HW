@@ -1,11 +1,9 @@
 const jwt = require('jsonwebtoken');
-// const { errorCodesEnum } = require('../constant/errorCodes.enum');
-
 const { errorMessages } = require('../message');
-const O_Auth = require('../dataBase/models/O_Auth.model');
 const { passwordHash } = require('../helpers');
-const authService = require('../service/auth.service');
 
+const O_Auth = require('../dataBase/models/O_Auth.model');
+const authService = require('../service/auth.service');
 const { JWT_SECRET, JWT_REFRESH_SECRET } = require('../config/config');
 const { AUTHORIZATION } = require('../constant/constants');
 
@@ -76,9 +74,7 @@ module.exports = {
             if (!tokens) {
                 throw new Error(errorMessages.TOKEN_IS_REQUIRED.en);
             }
-            console.log('___________________________________________________');
-            console.log(tokens);
-            console.log('___________________________________________________');
+
             req.refresh_token = tokens.refresh_token;
 
             next();
