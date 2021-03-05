@@ -39,17 +39,6 @@ module.exports = {
         }
     },
 
-    getByName: async (req, res) => {
-        try {
-            const { email } = req.body;
-            const user = await userService.findUserByEmail(email);
-
-            res.json(user);
-        } catch (e) {
-            res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
-        }
-    },
-
     deleteUserById: async (req, res) => {
         try {
             const { userId } = req.params;
