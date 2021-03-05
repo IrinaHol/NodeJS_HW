@@ -1,6 +1,7 @@
 const errorMessage = require('../message/error.messages');
 const errorCodes = require('../constant/errorCodes.enum');
 const { findUserById } = require('../service/user.service');
+const User = require('../dataBase/models/User.model');
 
 module.exports = {
     checkIsUserIdValid: async (req, res, next) => {
@@ -32,7 +33,7 @@ module.exports = {
 
             if (name.length > 10 || name.length < 2) throw new Error(errorMessage.NOT_VALID_NAME.en);
 
-            if (password.length > 10 || password.length < 5) throw new Error(errorMessage.NOT_VALID_PASSWORD.en);
+            if (password.length > 20 || password.length < 5) throw new Error(errorMessage.NOT_VALID_PASSWORD.en);
 
             if (age > 100 || age < 12 || !Number.isInteger(age)) throw new Error(errorMessage.NOT_VALID_AGE.en);
 
@@ -42,16 +43,19 @@ module.exports = {
         }
     },
 
-    isUserPresent: (req, res, next) => {
+    isUserPresent: async (req, res, next) => {
         try {
             const { email } = req.body;
 
-            if (!email) throw new Error(errorMessage.NOT_PRESENT_USER.en);
+            const userByEmail = await User.findOne({ email });
+
+            if (userByEmail) {
+                throw new Error(errorMessage.USER_IS_PRESENT.en);
+            }
 
             next();
         } catch (e) {
             res.status(errorCodes.BAD_REQUEST).json(e.message);
         }
     }
-
 };

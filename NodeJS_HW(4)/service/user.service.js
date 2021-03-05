@@ -10,5 +10,4 @@ module.exports = {
 
     deleteUserById: (userId) => User.findByIdAndDelete(userId),
 
-    getUserByEmail: (email) => User.findOne(email)
 };

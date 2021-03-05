@@ -46,17 +46,5 @@ module.exports = {
         } catch (e) {
             res.status(errorCodes.BAD_REQUEST).json(e.message);
         }
-    },
-
-    getUserByEmail: async (req, res) => {
-        try {
-            const { email } = req.body;
-
-            const userByEmail = await userService.getUserByEmail(email);
-
-            res.json(userByEmail);
-        } catch (e) {
-            res.status(errorCodes.BAD_REQUEST).json(e.message);
-        }
     }
 };
