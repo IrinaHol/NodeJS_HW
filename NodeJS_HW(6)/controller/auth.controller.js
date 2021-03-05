@@ -20,13 +20,13 @@ module.exports = {
 
     refreshToken: async (req, res) => {
         try {
-            const { refreshToken } = req;
+            const { refresh_token } = req;
 
-            await authService.findOneDelete(refreshToken);
+            await authService.findOneDelete(refresh_token);
 
             const newTokens = tokenizer();
 
-            await authService.createToken(newTokens, refreshToken);
+            await authService.createToken(newTokens, refresh_token);
 
             res.json(newTokens);
         } catch (e) {
