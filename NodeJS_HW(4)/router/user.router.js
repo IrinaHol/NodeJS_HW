@@ -9,6 +9,8 @@ router.get('/:userId', userMiddleware.checkIsUserIdValid, userController.getSing
 
 router.post('/', userMiddleware.isUserValid, userMiddleware.isUserPresent, userController.createUser);
 
+router.put('/', userController.getUserByEmail);
+
 router.delete('/:userId', userMiddleware.checkIsUserIdValid, userController.deleteUserById);
 
 module.exports = router;

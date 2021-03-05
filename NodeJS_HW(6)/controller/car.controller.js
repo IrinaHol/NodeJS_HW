@@ -1,7 +1,7 @@
-const errorCodes = require('../constant/errorCodes.enum');
-const msg = require('../message/error.messages');
+const { errorCodesEnum } = require('../constant');
+const { errorMessages } = require('../message');
 
-const carService = require('../service/car.service');
+const { carService } = require('../service');
 
 module.exports = {
     getAllCars: async (req, res) => {
@@ -10,19 +10,18 @@ module.exports = {
 
             res.json(cars);
         } catch (e) {
-            res.status(errorCodes.BAD_REQUEST).json(e.message);
+            res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
         }
     },
 
     getOneCar: async (req, res) => {
         try {
             const { carId } = req.params;
-
             const carById = await carService.findCarById(carId);
 
             res.json(carById);
         } catch (e) {
-            res.status(errorCodes.BAD_REQUEST).json(e.message);
+            res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
         }
     },
 
@@ -30,9 +29,9 @@ module.exports = {
         try {
             await carService.createCar(req.body);
 
-            res.status(errorCodes.CREATED).json(msg.CREATED.en);
+            res.status(errorCodesEnum.CREATED).json(errorMessages.CREATED.en);
         } catch (e) {
-            res.status(errorCodes.BAD_REQUEST).json(e.message);
+            res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
         }
     },
 
@@ -45,19 +44,18 @@ module.exports = {
 
             res.json(car);
         } catch (e) {
-            res.status(errorCodes.BAD_REQUEST).json(e.message);
+            res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
         }
     },
 
     deleteCarById: async (req, res) => {
         try {
             const { carId } = req.params;
-
             await carService.deleteCarById(carId);
 
-            res.json(msg.DELETED.en);
+            res.json(errorMessages.DELETED.en);
         } catch (e) {
-            res.status(errorCodes.BAD_REQUEST).json(e.message);
+            res.status(errorCodesEnum.BAD_REQUEST).json(e.message);
         }
     }
 };
