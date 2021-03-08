@@ -6,11 +6,11 @@ module.exports = {
 
     login: async (req, res) => {
         try {
-            const { userID } = req.params;
+            const { user } = req;
 
             const tokens = tokenizer();
 
-            await authService.createToken(tokens, userID);
+            await authService.createToken({ ...tokens, user });
 
             res.json(tokens);
         } catch (e) {
