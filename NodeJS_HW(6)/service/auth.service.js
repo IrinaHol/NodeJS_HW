@@ -3,7 +3,7 @@ const { Auth, User } = require('../dataBase/models');
 module.exports = {
     findOneUser: (email) => User.findOne(email),
 
-    createToken: (tokens, userID) => Auth.create({ ...tokens, userID }),
+    createToken: (tokensObj) => Auth.create(tokensObj),
 
     findOneDelete: (refreshToken) => Auth.findOneAndDelete(refreshToken),
 
