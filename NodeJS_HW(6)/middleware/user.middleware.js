@@ -18,6 +18,8 @@ module.exports = {
             if (!findUser) {
                 throw new Error(errorMessages.NOT_PRESENT_USER.en);
             }
+            
+            req.user = findUser;
 
             next();
         } catch (e) {
@@ -48,6 +50,8 @@ module.exports = {
             if (userByEmail) {
                 throw new Error(errorMessages.USER_IS_PRESENT.en);
             }
+            
+             req.user = userByEmail;
 
             next();
         } catch (e) {
