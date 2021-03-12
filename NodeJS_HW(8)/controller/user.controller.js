@@ -29,9 +29,8 @@ module.exports = {
 
     updateUser: async (req, res, next) => {
         try {
-            const { userId } = req.params;
-            const { password, email } = req.body;
-
+            const { body: { email, password }, params: { userId }} = req;     
+      
             const user = await userService.updateUser(userId, password);
 
             await emailService.sendMail(email, emailActionsEnum.PASSWORD_CHANGED);
@@ -68,8 +67,7 @@ module.exports = {
 
     deleteUserById: async (req, res, next) => {
         try {
-            const { userId } = req.params;
-            const { email } = req.body;
+            const { body: { email }, params: { userId }} = req;
 
             await userService.deleteUserById(userId);
 
