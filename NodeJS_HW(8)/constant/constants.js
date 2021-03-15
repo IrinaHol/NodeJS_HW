@@ -21,11 +21,5 @@ module.exports = {
         'application/pdf', // PDF
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // XLS
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document' // DOC 2007
-    ],
-
-    VIDEOS_MIMETYPES: [
-        'video/mpeg',
-        'video/mp4',
-        'video/webm'
     ]
 };
