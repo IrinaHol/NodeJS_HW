@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
 
 const { AUTHORIZATION } = require('../constant/constants');
-const authService = require('../service/auth.service');
-const ErrorHandler = require('../message/ErrorHandler');
 const { errorCodesEnum } = require('../constant');
 const { JWT_SECRET, JWT_REFRESH_SECRET } = require('../config/config');
 const O_Auth = require('../dataBase/models/O_Auth.model');
 const { passwordHash } = require('../helpers');
+const ErrorHandler = require('../message/ErrorHandler');
+const authService = require('../service/auth.service');
+
 const { TOKEN_IS_REQUIRED, WRONG_TOKEN, RECORD_NOT_FOUND } = require('../message/error.messages');
 
 module.exports = {

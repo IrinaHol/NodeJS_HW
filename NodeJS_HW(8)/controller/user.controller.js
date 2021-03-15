@@ -1,9 +1,7 @@
-const fs = require('fs-extra').promises;
-
 const { emailActionsEnum } = require('../constant');
-const { emailService, fileService, userService } = require('../service');
-const { errorMessages } = require('../message');
 const { passwordHash } = require('../helpers');
+const { errorMessages } = require('../message');
+const { emailService, fileService, userService } = require('../service');
 
 module.exports = {
     getAllUsers: async (req, res, next) => {
@@ -29,8 +27,7 @@ module.exports = {
 
     updateUser: async (req, res, next) => {
         try {
-            const { userId } = req.params;
-            const { password, email } = req.body;
+            const { params: { userId }, body: { email, password } } = req;
 
             const user = await userService.updateUser(userId, password);
 
@@ -50,10 +47,7 @@ module.exports = {
             const user = await userService.createUser({ ...req.body, password: hasPassword });
 
             if (avatar) {
-                const { finalPath, uploadPath, fileDir } = fileService.dirBuilder(avatar.name, 'photos', 'user', user._id);
-
-                await fs.mkdir(fileDir, { recursive: true });
-                await avatar.mv(finalPath);
+                const uploadPath = await fileService.dirBuilder(avatar, avatar.name, 'photos', 'user', user._id);
 
                 await userService.updateUser(user._id, { avatar: uploadPath });
             }
@@ -68,8 +62,7 @@ module.exports = {
 
     deleteUserById: async (req, res, next) => {
         try {
-            const { userId } = req.params;
-            const { email } = req.body;
+            const { params: { userId }, body: { email } } = req;
 
             await userService.deleteUserById(userId);
 

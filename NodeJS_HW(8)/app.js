@@ -1,13 +1,13 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const fileUpload = require('express-fileupload');
 const path = require('path');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 
 dotenv.config({ path: path.join(process.cwd(), '../.env') });
 
-const { apiRouter } = require('./router');
 const { MONGO_DB, PORT } = require('./config/config');
+const { apiRouter } = require('./router');
 
 const app = express();
 

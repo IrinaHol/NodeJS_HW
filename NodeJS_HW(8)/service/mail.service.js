@@ -1,11 +1,11 @@
-const mailer = require('nodemailer');
 const EmailTemplates = require('email-templates');
+const mailer = require('nodemailer');
 const path = require('path');
 
-const ErrorHandler = require('../message/ErrorHandler');
 const { errorCodesEnum } = require('../constant');
 const { SERVICE_EMAIL, SERVICE_EMAIL_PASSWORD } = require('../config/config');
 const templateInfo = require('../emailTemplates');
+const ErrorHandler = require('../message/ErrorHandler');
 const { WRONG_MAIL_ACTION } = require('../message/error.messages');
 
 const templateParser = new EmailTemplates({

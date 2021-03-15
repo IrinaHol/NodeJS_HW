@@ -1,5 +1,3 @@
-const fs = require('fs-extra').promises;
-
 const { errorMessages } = require('../message');
 const { carService, fileService } = require('../service');
 
@@ -33,24 +31,18 @@ module.exports = {
 
             if (photos) {
                 for (const photo of photos) {
-                    const { finalPath, uploadPath, fileDir } = fileService.dirBuilder(photo.name, 'photos', 'cars', car._id);
                     // eslint-disable-next-line no-await-in-loop
-                    await fs.mkdir(fileDir, { recursive: true });
-                    // eslint-disable-next-line no-await-in-loop
-                    await photo.mv(finalPath);
+                    const uploadPath = await fileService.dirBuilder(photo, photo.name, 'photos', 'cars', car._id);
                     // eslint-disable-next-line no-await-in-loop
                     await carService.updateCar(car._id, { photos: uploadPath });
                 }
             }
             if (docs) {
                 for (const doc of docs) {
-                    const { finalPath, uploadPath, fileDir } = fileService.dirBuilder(doc.name, 'documents', 'cars', car._id);
                     // eslint-disable-next-line no-await-in-loop
-                    await fs.mkdir(fileDir, { recursive: true });
+                    const uploadPath = await fileService.dirBuilder(doc, doc.name, 'documents', 'cars', car._id);
                     // eslint-disable-next-line no-await-in-loop
-                    await doc.mv(finalPath);
-                    // eslint-disable-next-line no-await-in-loop
-                    await carService.updateCar(car._id, { docs: uploadPath });
+                     await carService.updateCar(car._id, { docs: uploadPath });
                 }
             }
 
@@ -62,8 +54,7 @@ module.exports = {
 
     updateCar: async (req, res, next) => {
         try {
-            const { carId } = req.params;
-            const { body } = req;
+            const { params: { carId }, body } = req;
 
             const car = await carService.updateCar(carId, body);
 

@@ -1,8 +1,8 @@
 const { errorCodesEnum } = require('../constant');
-const { userValidator } = require('../validators');
 const User = require('../dataBase/models/User.model');
 const ErrorHandler = require('../message/ErrorHandler');
 const { NOT_VALID_USER, RECORD_NOT_FOUND } = require('../message/error.messages');
+const { userValidator } = require('../validators');
 
 module.exports = {
     checkIsUserIdValid: (req, res, next) => {
