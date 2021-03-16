@@ -1,8 +1,9 @@
 const { DataTypes } = require('sequelize');
+const { STUDENTS } = require('../../../constant/constants');
 
 module.exports = (client) => {
     const Student = client.define(
-        'Student',
+        STUDENTS,
         {
             id: {
                 type: DataTypes.INTEGER,

@@ -1,6 +1,7 @@
 module.exports = {
     CURRENT_YEAR: new Date().getFullYear(),
     AUTHORIZATION: 'Authorization',
+    STUDENTS: 'Student',
 
     PHOTO_MAX_SIZE: 2 * 1024 * 1024, // 2MB
     FILE_MAX_SIZE: 5 * 1024 * 1024, // 5MB
