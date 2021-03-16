@@ -11,7 +11,7 @@ router.post('/',
     fileMiddleware.checkCountAvatar,
     userController.createUser);
 
-router.use('/', userMiddleware.checkIsUserIdValid);
+router.use('/:userId', userMiddleware.checkIsUserIdValid);
 router.get('/:userId', userController.getSingleUser);
 router.delete('/:userId', userController.deleteUserById);
 router.put('/:userId', userMiddleware.isUserUpdateValid, userController.updateUser);
