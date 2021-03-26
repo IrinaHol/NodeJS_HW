@@ -49,10 +49,10 @@ module.exports = {
         return User.findOne({ where: { id } });
     },
 
-    findOneUser: (email) => {
+    findOneUser: (userObject) => {
         const User = db.getModel(USER);
 
-        return User.findOne({ where: { email } });
+        return User.findOne({ where: { userObject } });
     },
 
     updateOneUser: (id, cartObject, transaction) => {

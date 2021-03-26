@@ -4,7 +4,7 @@ const deleteOldTokens = require('./delete-old-tokens');
 
 module.exports = () => {
     try {
-        cron.schedule('* 30 * *', async () => {
+        cron.schedule('0 0 1 * *', async () => {
             console.log(`${new Date().toISOString()}: jobs started`);
             await deleteOldTokens();
             console.log(`${new Date().toISOString()}: jobs finished`);

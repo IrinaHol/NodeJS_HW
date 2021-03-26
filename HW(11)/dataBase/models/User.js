@@ -31,21 +31,18 @@ module.exports = (client) => {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            role: {
-                type: DataTypes.STRING,
-                defaultValue: USER
-            }
         },
         {
             tableName: USERS,
             timestamps: false
         }
     );
-
     const O_Auth = require('./O_Auth')(client);
 
     User.hasMany(O_Auth, {
-        foreignKey: 'users_id'
+        foreignKey: 'users_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
     });
 
     return User;

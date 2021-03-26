@@ -17,7 +17,7 @@ module.exports = {
             const { email, password } = req.body;
 
             const user = await userService.findOneUser(email);
-
+            console.log(user);
             if (!user) {
                 throw new ErrorHandler(errorCodesEnum.BAD_REQUEST, RECORD_NOT_FOUND.customCode);
             }
@@ -48,14 +48,11 @@ module.exports = {
 
             const tokens = await authService.findOneToken({ access_token });
 
-            const user = await userService.findUserById(tokens.users_id);
-
             if (!tokens) {
                 throw new ErrorHandler(errorCodesEnum.NOT_FOUND, RECORD_NOT_FOUND.customCode);
             }
 
-            req.user = user;
-
+            req.users = tokens.users;
             next();
         } catch (e) {
             next(e);

@@ -71,9 +71,9 @@ module.exports = {
         try {
             const { params: { id } } = req;
 
-            await userService.deleteOneUser(+id, transaction);
+            await userService.deleteOneUser(id, transaction);
 
-            await authService.deleteToken(id, transaction);
+            await authService.deleteToken(id);
 
             await transaction.commit();
             res.json(errorMessages.DELETED.customCode);

@@ -17,7 +17,7 @@ module.exports = {
     deleteToken: (id, transaction) => {
         const O_Auth = db.getModel(O_AUTH);
 
-        return O_Auth.destroy({ where: id, transaction });
+        return O_Auth.destroy({ where: { users_id: id }, transaction });
     },
 
     updateToken: (id, updateObject, transaction) => {

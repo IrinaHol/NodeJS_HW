@@ -1,20 +1,18 @@
 const { errorCodesEnum } = require('../constant');
 const ErrorHandler = require('../message/ErrorHandler');
 const { NOT_VALID_USER, RECORD_NOT_FOUND } = require('../message/error.messages');
-const { userService } = require('../service');
 const { userValidator } = require('../validators');
+const { userService } = require('../service');
 
 module.exports = {
-    checkIsUserIdValid: async (req, res, next) => {
+    checkIsUserIdValid: (req, res, next) => {
         try {
-            const { id } = req.params;
-            const { error } = userValidator.idUserValidator.validate(id);
-            const user = await userService.findUserById(id);
+            const { userId } = req.params;
+            const { error } = userValidator.idUserValidator.validate(userId);
 
             if (error) {
                 throw new ErrorHandler(errorCodesEnum.BAD_REQUEST, NOT_VALID_USER.customCode, error.details[0].message);
             }
-            req.user = user;
 
             next();
         } catch (e) {
@@ -35,6 +33,7 @@ module.exports = {
             next(e);
         }
     },
+    //
 
     isUserPresent: async (req, res, next) => {
         try {

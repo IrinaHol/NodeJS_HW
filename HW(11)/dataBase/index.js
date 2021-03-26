@@ -37,6 +37,7 @@ module.exports = (() => {
             if (!instance) {
                 instance = initConnection();
             }
+
             return instance;
         }
     };
