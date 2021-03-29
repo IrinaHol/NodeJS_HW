@@ -9,6 +9,7 @@ const ErrorHandler = require('../message/ErrorHandler');
 const { authService, userService } = require('../service');
 
 const { TOKEN_IS_REQUIRED, WRONG_TOKEN, RECORD_NOT_FOUND } = require('../message/error.messages');
+const logger = require('../logger/winston')();
 
 module.exports = {
 
@@ -39,6 +40,7 @@ module.exports = {
             if (!access_token) {
                 throw new ErrorHandler(errorCodesEnum.BAD_REQUEST, TOKEN_IS_REQUIRED.customCode);
             }
+             logger.info('No valid token');
 
             jwt.verify(access_token, JWT_SECRET, (err) => {
                 if (err) {
