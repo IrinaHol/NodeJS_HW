@@ -3,8 +3,10 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const path = require('path');
 const morgan = require('morgan');
+const swaggerUi = require('swagger-ui-express');
 
 dotenv.config({ path: path.join(process.cwd(), '../.env') });
+const swaggerDoc = require('./docs/swagger.json');
 
 const db = require('./dataBase').getInstance();
 const cron = require('./cron_Jobs');
@@ -24,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(process.cwd(), 'static')));
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use('/', apiRouter);
 
 // eslint-disable-next-line no-unused-vars

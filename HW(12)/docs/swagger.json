@@ -1,0 +1,185 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "myPractice",
+    "description": "swagger Doc"
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "get all users",
+        "operationId": "getAllUsers",
+        "parameters": [{
+          "name": "ageGte",
+          "description": "Older than some age",
+          "in": "query",
+          "required": false,
+          "type": "number",
+          "example": 26
+        },
+          {
+            "name": "ageLte",
+            "description": "younger than some age ",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "example": 26
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "allUsers success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/singleUser"
+                  }
+                },
+                "page": {
+                  "type": "number",
+                  "description": "currentPage",
+                  "example": 11
+                },
+                "limit": {
+                  "type": "number",
+                  "description": "limit",
+                  "example": 10
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "wrong",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "description": "Be custom code",
+                  "type": "number",
+                  "example": 4001
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "create user",
+        "operationId": "createUser",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "uarar@ue"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "example": "Olia"
+          },
+          {
+            "name": "age",
+            "in": "formData",
+            "type": "number",
+            "example": 23
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "type": "string",
+            "example": "23333Rrrrr"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user is created",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/singleUser"
+            }
+          },
+          "409": {
+            "description": "conflict. user already exist",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "customCode": {
+                  "type": "number",
+                  "example": 4901,
+                  "description": "customCode for conflict"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "email already exist",
+                  "description": "email exist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "get single users",
+        "operationId": "getSingleUsers",
+        "parameters": [{
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "type": "number",
+          "example": 1
+        },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "access token which you get after logger",
+            "required": true,
+            "type": "string",
+            "example": "header"
+          }],
+        "responses": {
+          "200": {
+            "description": "allUsers success",
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/singleUser"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "singleUser": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Ira"
+        },
+        "age": {
+          "type": "number",
+          "example": 26
+        }
+      }
+    }
+  }
+}
