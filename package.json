@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@sentry/node": "^6.2.4",
+    "@sentry/tracing": "^6.2.4",
     "bcrypt": "^5.0.1",
     "dayjs": "^1.10.4",
     "dotenv": "^8.2.0",

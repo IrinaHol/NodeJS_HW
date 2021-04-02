@@ -16,9 +16,11 @@ db.setModels();
 const { PORT } = require('./configs/config');
 const { apiRouter } = require('./router');
 const logger = require('./logger/winston')();
+const Sentry = require('./logger/sentry');
 
 const app = express();
 
+app.use(Sentry.Handlers.requestHandler());
 app.use(morgan('dev'));
 app.use(fileUpload());
 app.use(express.json());
@@ -29,8 +31,12 @@ app.use(express.static(path.join(process.cwd(), 'static')));
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use('/', apiRouter);
 
+app.use(Sentry.Handlers.errorHandler());
+
 // eslint-disable-next-line no-unused-vars
 app.use('*', (err, req, res, next) => {
+    Sentry.captureException(err);
+
     logger.error({
         message: err.message,
         code: err.customCode,
