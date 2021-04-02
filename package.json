@@ -2,6 +2,9 @@
   "name": "MainNodeJS-HW",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "14.x"
+  },
   "main": "index.js",
   "dependencies": {
     "@sentry/node": "^6.2.4",
@@ -60,6 +63,7 @@
     }
   },
   "scripts": {
+    "start": "MainNodeJS-HW HW(12)/app.js",
     "first": "npx sequelize-cli db:migrate && nodemon app.js",
     "test": "jest",
     "coverage": "nyc npm run test"
